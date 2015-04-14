@@ -1,0 +1,71 @@
+<!-- The HTML  Structure -->
+<!-- NOTES:
+* Make sure the ID on the container is unique to the whole HTML document.
+* You can change the size of the clickable header by using different header elements H1 -> H6
+* Inside the CEL-accordionContent box anything goes. Add 40/60's images, anything.
+ -->
+<div class="CEL-accordion-container" id="accordion1">
+    <div class="CEL-accordionBox">
+        <h3 class="CEL-accordionHeader">clickable sub-headers reveal content</h3>
+        <div class="CEL-accordionContent">
+            <div class="CEL-1col-100">
+                <p>Insert Content Here</p>
+            </div><!-- end 100 -->
+        </div><!-- end accordion Content -->
+    </div><!-- end accordionBOX -->
+    <div class="CEL-accordionBox">
+        <h3 class="CEL-accordionHeader">Different Size sub headers</h3>
+        <div class="CEL-accordionContent">
+            <p>Insert content here</p>
+        </div><!-- end accordion Content -->
+    </div><!-- end accordionBox -->
+
+</div><!-- end accordion container -->
+
+/* The JS */
+
+/* Add the following couple of lines to Document.ready/ window.onLoad function */
+
+// add the accordion listeners
+var accordionHeaders = document.getElementsByClassName("CEL-accordionHeader");
+for(var ah=0;ah<accordionHeaders.length;ah++){
+    accordionHeaders[ah].addEventListener("click",celAccordionHandler,"false");
+}//end for
+
+/* Add this function at the top of your JS file */
+
+/* This is for the accordion widget  */
+function celAccordionHandler(){
+	//first hide all the accordions that are showing.
+	var theVisibleAccordions = document.getElementsByClassName("CEL-accordionContent-active");
+	for(tva=0;tva<theVisibleAccordions.length;tva++){
+		theVisibleAccordions[tva].className = "CEL-accordionContent";
+	}//end for
+	//then show the accordion that was clicked.
+	var parentBox = this.parentNode;
+	for(var pb=0;pb<parentBox.children.length;pb++){
+		var boxClassname = parentBox.children[pb].className;
+
+		if(boxClassname ==="CEL-accordionContent"){
+			parentBox.children[pb].className = "CEL-accordionContent-active";
+			parentBox.children[pb].style.opacity = "1";
+		}
+		//end if
+
+
+	}//end for
+}//end function
+
+/* The CSS */
+/* Most of these styles exist in the CSS file already, but I have added a style, and so should you. since it is easier to just go ahead and select the whole block I suggest you do just that. Select the whole darn thing, and paste it over the existing styles. */
+
+/* start copy here */
+
+.CEL-accordion-container{float: left;width: 100%;margin: 0;padding: 0;display: inline-block;}
+.CEL-accordionBox{float: left;width: 100%;margin: 0;padding: 0;display: inline-block;}
+.CEL-accordionHeader{background-color: #999;margin: .125em 0 .125em 0;padding: 0 0 0 10px;border-radius: 5px;}
+.CEL-accordionHeader:hover{background-color: #777;}
+.CEL-accordionContent{display: none !important;visibility: hidden;opacity: 0;}/*default hidden state*/
+.CEL-accordionContent-active{display: block !important;visibility: visible;opacity: 1;}/*active shown state, opacity changes via JS*/
+
+/* end copy here*/

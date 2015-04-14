@@ -102,6 +102,9 @@ li p{margin: 0 auto 0 auto;}
 	.CEL-accordionBox{float: left;width: 100%;margin: 0;padding: 0;display: inline-block;}
 	.CEL-accordionHeader{background-color: #999;margin: .125em 0 .125em 0;padding: 0 0 0 10px;border-radius: 5px;}
 	.CEL-accordionHeader:hover{background-color: #777;}
+	.CEL-accordionContent{display: none !important;visibility: hidden;opacity: 0;}/*default hidden state*/
+	.CEL-accordionContent-active{display: block !important;visibility: visible;opacity: 1;}/*active shown state, opacity changes via JS*/
+
 	
 	
 /* Tabular Widget Styles */

@@ -9,36 +9,28 @@
 /* ANY JQUERY SHOULD RESIDE IN THE DOCUMENT.READY FUNCTION BELOW. */
 
 /* This is for the accordion widget  */
+function celAccordionHandler(){
+	//first hide all the accordions that are showing.
+	var theVisibleAccordions = document.getElementsByClassName("CEL-accordionContent-active");
+	for(tva=0;tva<theVisibleAccordions.length;tva++){
+		theVisibleAccordions[tva].className = "CEL-accordionContent";
+	}//end for
+	//then show the accordion that was clicked on.
+	var parentBox = this.parentNode;
+	for(var pb=0;pb<parentBox.children.length;pb++){
+		var boxClassname = parentBox.children[pb].className;
+
+		if(boxClassname ==="CEL-accordionContent"){
+			parentBox.children[pb].className = "CEL-accordionContent-active";
+
+		}
+		//end if
 
 
-/* Hide all the content boxes initially */
-$(".CEL-accordionContent").addClass("hidden").css("opacity","0");
-
-/* Add listeners to all the accordion headers */
-var accordionContainerChildren;
-accordionContainerChildren = document.getElementById("accordion1").children;
-
-for(m=0; m < accordionContainerChildren.length; m++){
-	accordionContainerChildren[m].children[0].addEventListener("click", accordionHeader, false);;
-}/* end for */
+	}//end for
+}//end function
 
 
-
-function accordionHeader(){
-	/* if it is visible then hide it...if it's not then hide all the others and then show it.  */
-	var theElementOpacity = $(this).parent().find(".CEL-accordionContent").css("opacity");
-	/* if you can see it then hide it */
-	if (theElementOpacity == "1"){
-		$(this).parent().find(".CEL-accordionContent").animate({opacity: 0},300,function(){$(this).parent().find(".CEL-accordionContent").addClass('hidden');});
-	} /* end if */
-	/* if you cannot see it then show it */
-	if (theElementOpacity == "0"){
-		$(".CEL-accordionContent").addClass("hidden").css("opacity","0");
-		$(this).parent().find(".CEL-accordionContent").removeClass('hidden').animate({opacity: 1});
-	}/* end if */
-}/* end accordionHeader function */
-
-/* end accordion Listeners */
 
 /* ========================================================== 
 -------------------------------------------------------------END Supplementary Functions Section
@@ -47,7 +39,11 @@ function accordionHeader(){
 
 /* -------------------------------------------------------------------------------------------- begin The Document.Ready function */
 $(document).ready(function(){
-	
+	//accordion listeners
+	var accordionHeaders = document.getElementsByClassName("CEL-accordionHeader");
+	for(var ah=0;ah<accordionHeaders.length;ah++){
+		accordionHeaders[ah].addEventListener("click",celAccordionHandler,"false");
+	}//end for
 	/* this addresses a Mozilla bug that does not reset values in forms upon window.reload */
 	resetForm($('form'));
 	//add titles and alt tags to nav elements based on their coresponding slide headers to the whole document. 
