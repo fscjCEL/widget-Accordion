@@ -8,7 +8,37 @@
 /* NOTE: ADD ANY SUPLIMENTARY FUNCTIONS HERE */
 /* ANY JQUERY SHOULD RESIDE IN THE DOCUMENT.READY FUNCTION BELOW. */
 
+/* This is for the accordion widget  */
 
+
+/* Hide all the content boxes initially */
+$(".CEL-accordionContent").addClass("hidden").css("opacity","0");
+
+/* Add listeners to all the accordion headers */
+var accordionContainerChildren;
+accordionContainerChildren = document.getElementById("accordion1").children;
+
+for(m=0; m < accordionContainerChildren.length; m++){
+	accordionContainerChildren[m].children[0].addEventListener("click", accordionHeader, false);;
+}/* end for */
+
+
+
+function accordionHeader(){
+	/* if it is visible then hide it...if it's not then hide all the others and then show it.  */
+	var theElementOpacity = $(this).parent().find(".CEL-accordionContent").css("opacity");
+	/* if you can see it then hide it */
+	if (theElementOpacity == "1"){
+		$(this).parent().find(".CEL-accordionContent").animate({opacity: 0},300,function(){$(this).parent().find(".CEL-accordionContent").addClass('hidden');});
+	} /* end if */
+	/* if you cannot see it then show it */
+	if (theElementOpacity == "0"){
+		$(".CEL-accordionContent").addClass("hidden").css("opacity","0");
+		$(this).parent().find(".CEL-accordionContent").removeClass('hidden').animate({opacity: 1});
+	}/* end if */
+}/* end accordionHeader function */
+
+/* end accordion Listeners */
 
 /* ========================================================== 
 -------------------------------------------------------------END Supplementary Functions Section
