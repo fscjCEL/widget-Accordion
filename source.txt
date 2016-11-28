@@ -21,7 +21,7 @@ var accordionMethod = {
     this.classList.remove("is-closedAccordion");
     this.classList.add("is-openAccordion");
     //replace class name.
-    showThisAccordion.getElementsByClassName("is-invisible")[0].className = "is-activeAccordion";
+    showThisAccordion.getElementsByClassName("is-invisible")[0].className = "is-activeAccordion is-cleared";
 }//end function
 };/*end accordionMethod*/
 var accordionHeaders = document.getElementsByClassName("cel-accordionHeader");
